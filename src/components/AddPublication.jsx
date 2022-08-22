@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AddPublicationService } from "../services/publication.services";
+import { uploadService } from "../services/upload.services";
 
 function AddPublication() {
   const navigate = useNavigate();
@@ -10,23 +11,36 @@ function AddPublication() {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState("");
 
+  const [fileUrl, setFileUrl] = useState("");
+
   const handleTitleChange = (event) => setTitle(event.target.value);
   const handleCategoryChange = (event) => setCategory(event.target.value);
   const handleDescriptionChange = (event) => setDescription(event.target.value);
-  const handleFileChange = (event) => setFile(event.target.value);
 
   const handleSubmit = async () => {
     const newPublication = {
       title: title,
       category: category,
       description: description,
-      file: file,
+      file: fileUrl,
     };
 
     try {
       await AddPublicationService(newPublication);
     } catch (error) {
-      navigate("/error");
+      console.log(error);
+    }
+  };
+
+  const handleFileUpload = async (event) => {
+    const form = new FormData();
+    form.append("media", event.target.files[0]);
+
+    try {
+      const response = await uploadService(form);
+      setFileUrl(response.data.fileUrl);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -34,7 +48,7 @@ function AddPublication() {
     <div>
       <h3>Agregar Publicación</h3>
 
-      <form onSubmit={handleSubmit}>
+      <form>
         <label htmlFor="title">Titulo </label>
         <input
           type="text"
@@ -59,16 +73,17 @@ function AddPublication() {
           value={description}
         />
         <br />
-        <label htmlFor="file">Archivo </label>
-        <input
-          type="file"
-          name="file"
-          onChange={handleFileChange}
-          value={file}
-        />
-        <br />
-        <button>Agregar</button>
+        <button type="button" onClick={handleSubmit}>
+          Agregar
+        </button>
       </form>
+      <div>
+        <h3>Añadir Video o Imagen</h3>
+        <input type="file" onChange={handleFileUpload} />
+        <video autoPlay controls width={200}>
+          <source src={fileUrl} />
+        </video>
+      </div>
     </div>
   );
 }

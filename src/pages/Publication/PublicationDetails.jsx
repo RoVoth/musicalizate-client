@@ -48,7 +48,9 @@ function PublicationDetails() {
       <p>Titulo: {singlePublication.title}</p>
       <p>Categoria: {singlePublication.category}</p>
       <p>Descripción: {singlePublication.description}</p>
-      <video src={singlePublication.file}></video>
+      <video autoPlay controls width={200}>
+        <source src={singlePublication.file} />
+      </video>
 
       <button onClick={handleDelete}>Borrar</button>
       <Link to={`/publication/${singlePublication._id}/edit`}>

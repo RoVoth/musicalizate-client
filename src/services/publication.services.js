@@ -1,8 +1,4 @@
-import axios from "axios";
-
-const service = axios.create({
-  baseURL: "http://localhost:5005/api",
-});
+import service from "./config.services";
 
 const getPublicationService = () => {
   return service.get("/publication");
