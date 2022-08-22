@@ -6,6 +6,8 @@ import PublicationList from "./pages/Publication/PublicationList";
 import PublicationDetails from "./pages/Publication/PublicationDetails";
 import PublicationEdit from "./pages/Publication/PublicationEdit";
 import Profile from "./pages/Profile/Profile";
+import Signup from "./pages/Auth/Signup";
+import Login from "./pages/Auth/Login";
 import Error from "./pages/Error";
 import NotFound from "./pages/NotFound";
 
@@ -23,6 +25,8 @@ function App() {
         />
         <Route path="/publication/:id/edit" element={<PublicationEdit />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
 
         <Route path="/error" element={<Error />} />
         <Route path="/*" element={<NotFound />} />
