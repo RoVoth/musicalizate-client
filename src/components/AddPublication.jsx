@@ -73,7 +73,7 @@ function AddPublication() {
         />
         <br />
         {fileUrl === null ? undefined : (
-          <button disabled={true} type="button" onClick={handleSubmit}>
+          <button disabled={false} type="submit" onClick={handleSubmit}>
             Agregar
           </button>
         )}
@@ -83,7 +83,7 @@ function AddPublication() {
         <input type="file" onChange={handleFileUpload} />
         <br />
         {fileUrl !== null ? (
-          <video src={fileUrl} autoPlay controls width={200}></video>
+          <video src={fileUrl} autoPlay controls width={300}></video>
         ) : undefined}
       </div>
     </div>
