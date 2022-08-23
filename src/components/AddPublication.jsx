@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AddPublicationService } from "../services/publication.services";
+import { addPublicationService } from "../services/publication.services";
 import { uploadService } from "../services/upload.services";
 
 function AddPublication() {
@@ -9,9 +9,8 @@ function AddPublication() {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
-  const [file, setFile] = useState("");
 
-  const [fileUrl, setFileUrl] = useState("");
+  const [fileUrl, setFileUrl] = useState(null);
 
   const handleTitleChange = (event) => setTitle(event.target.value);
   const handleCategoryChange = (event) => setCategory(event.target.value);
@@ -26,9 +25,9 @@ function AddPublication() {
     };
 
     try {
-      await AddPublicationService(newPublication);
+      await addPublicationService(newPublication);
     } catch (error) {
-      console.log(error);
+      navigate(error);
     }
   };
 
@@ -40,7 +39,7 @@ function AddPublication() {
       const response = await uploadService(form);
       setFileUrl(response.data.fileUrl);
     } catch (error) {
-      console.log(error);
+      navigate(error);
     }
   };
 
@@ -73,16 +72,19 @@ function AddPublication() {
           value={description}
         />
         <br />
-        <button type="button" onClick={handleSubmit}>
-          Agregar
-        </button>
+        {fileUrl === null ? undefined : (
+          <button disabled={true} type="button" onClick={handleSubmit}>
+            Agregar
+          </button>
+        )}
       </form>
       <div>
         <h3>Añadir Video o Imagen</h3>
         <input type="file" onChange={handleFileUpload} />
-        <video autoPlay controls width={200}>
-          <source src={fileUrl} />
-        </video>
+        <br />
+        {fileUrl !== null ? (
+          <video src={fileUrl} autoPlay controls width={200}></video>
+        ) : undefined}
       </div>
     </div>
   );

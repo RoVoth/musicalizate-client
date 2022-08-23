@@ -8,7 +8,7 @@ const getPublicationDetailsService = (id) => {
   return service.get(`/publication/${id}`);
 };
 
-const AddPublicationService = (newPublication) => {
+const addPublicationService = (newPublication) => {
   return service.post("/publication", newPublication);
 };
 
@@ -23,7 +23,7 @@ const updatePublicationService = (id, updatePublication) => {
 export {
   getPublicationService,
   getPublicationDetailsService,
-  AddPublicationService,
+  addPublicationService,
   deletePublicationService,
   updatePublicationService,
 };

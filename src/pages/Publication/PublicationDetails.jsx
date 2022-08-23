@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import AddMessage from "../../components/AddMessage";
 //Service
 import {
   deletePublicationService,
@@ -48,14 +49,18 @@ function PublicationDetails() {
       <p>Titulo: {singlePublication.title}</p>
       <p>Categoria: {singlePublication.category}</p>
       <p>Descripción: {singlePublication.description}</p>
-      <video autoPlay controls width={200}>
+      <video autoPlay controls width={300}>
         <source src={singlePublication.file} />
       </video>
-
+      <br />
       <button onClick={handleDelete}>Borrar</button>
       <Link to={`/publication/${singlePublication._id}/edit`}>
         <button>Editar</button>
       </Link>
+      <br />
+      <div>
+        <AddMessage />
+      </div>
     </div>
   );
 }
