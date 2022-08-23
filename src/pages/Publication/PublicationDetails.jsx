@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import AddMessage from "../../components/AddMessage";
+import ListMessage from "../../components/ListMessage";
 //Service
 import {
   deletePublicationService,
@@ -59,7 +60,8 @@ function PublicationDetails() {
       </Link>
       <br />
       <div>
-        <AddMessage />
+        <AddMessage publicationId={singlePublication._id} />
+        <ListMessage publicationId={singlePublication._id} />
       </div>
     </div>
   );

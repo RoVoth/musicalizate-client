@@ -1,11 +1,11 @@
 import service from "./config.services";
 
-const getMessageService = (messageId) => {
-  return service.get(`/message/${messageId}`);
+const getMessageService = (publicationId) => {
+  return service.get(`/message/${publicationId}`);
 };
 
-const newMessageService = (messageId) => {
-  return service.post(`/message/${messageId}`);
+const newMessageService = (newMessage, publicationId) => {
+  return service.post(`/message/${publicationId}`, newMessage);
 };
 
 const deleteMessageService = (messageId) => {

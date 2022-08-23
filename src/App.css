@@ -38,12 +38,8 @@
     transform: rotate(360deg);
   }
 }
-section {
-  color: #fff;
-  text-shadow: 3px 3px rgba(50,50,70,0.5);
-  background-color: #c2b6b7b0;
-  height: 100vh;  
-}
+ 
 .navBg {
   background-color: #646069;
 }
+

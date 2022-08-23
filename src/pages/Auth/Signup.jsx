@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signupService } from "../../services/auth.services";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 function Signup() {
   const navigate = useNavigate();
@@ -37,39 +39,65 @@ function Signup() {
   };
 
   return (
-    <div>
-      <h3>Registro</h3>
-      <form onSubmit={handleSignup}>
-        <label>Nombre:</label>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={handleUsernameChange}
-        />
-        <br />
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        <br />
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        <br />
-        {errorMessage ? <p>{errorMessage}</p> : null}
-        <br />
-        <button type="submit">Registrarte</button>
-      </form>
-    </div>
+    <Form id="signupform" onSubmit={handleSignup}>
+      <h3>Registro de Usuario</h3>
+      <Form.Group className="mb-3" controlId="formBasicUsername">
+        <Form.Label value={username} onChange={handleUsernameChange}>
+          Nombre:
+        </Form.Label>
+        <Form.Control type="text" placeholder="Nombre de usuario" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label value={email} onChange={handleEmailChange}>
+          Email:
+        </Form.Label>
+        <Form.Control type="email" placeholder="Email del Usuario" />
+        <Form.Text className="text-muted">
+          No compartiremos su email con nadie.
+        </Form.Text>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label value={password} onChange={handlePasswordChange}>
+          Password:
+        </Form.Label>
+        <Form.Control type="password" placeholder="Password del Usuario" />
+      </Form.Group>
+
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
   );
 }
 
 export default Signup;
+/*
+
+  return (
+    <Form onSubmit={handleSignup}>
+      <h3>Registro de Usuario</h3>
+      <Form.Group className="mb-3" controlId="formBasicUsername">
+        <Form.Label value={username} onChange={handleUsernameChange} >Nombre:</Form.Label>
+        <Form.Control type="text" placeholder="Nombre de usuario" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label value={email} onChange={handleEmailChange}>Email:</Form.Label>
+        <Form.Control type="email" placeholder="Email del Usuario" />
+        <Form.Text className="text-muted">
+          No compartiremos su email con nadie.
+        </Form.Text>
+      </Form.Group>      
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label value={password} onChange={handlePasswordChange}>Password:</Form.Label>
+        <Form.Control type="password" placeholder="Password del Usuario" />
+      </Form.Group>
+
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
+  );
+}
+
+
+*/

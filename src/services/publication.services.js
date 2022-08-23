@@ -3,7 +3,9 @@ import service from "./config.services";
 const getPublicationService = () => {
   return service.get("/publication");
 };
-
+const getPersonalPublicationService = () => {
+  return service.get("/publication/personalPublication");
+};
 const getPublicationDetailsService = (id) => {
   return service.get(`/publication/${id}`);
 };
@@ -26,4 +28,5 @@ export {
   addPublicationService,
   deletePublicationService,
   updatePublicationService,
+  getPersonalPublicationService,
 };

@@ -2,9 +2,9 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 //Service
-import { getPublicationService } from "../../services/publication.services";
+import { getPersonalPublicationService } from "../../services/publication.services";
 
-function PublicationList() {
+function PersonalPublication() {
   const navigate = useNavigate();
 
   const [allPublication, setAllPublication] = useState([]);
@@ -16,7 +16,7 @@ function PublicationList() {
 
   const getPublication = async () => {
     try {
-      const response = await getPublicationService();
+      const response = await getPersonalPublicationService();
       setAllPublication(response.data);
       setIsFetching(false);
     } catch (error) {
@@ -27,10 +27,12 @@ function PublicationList() {
   if (isFetching === true) {
     return <h3>...Loading</h3>;
   }
-
+  if (allPublication.length === 0) {
+    return <h3>Este Perfil no tiene Publicaciones</h3>;
+  }
   return (
     <div>
-      <h3>Lista de Publication</h3>
+      <h3>Lista de Profile</h3>
 
       {allPublication.map((eachPublication) => {
         return (
@@ -45,4 +47,4 @@ function PublicationList() {
   );
 }
 
-export default PublicationList;
+export default PersonalPublication;
