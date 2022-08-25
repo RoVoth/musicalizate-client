@@ -6,7 +6,7 @@ const AuthContext = createContext();
 function AuthWrapper(props) {
   const [isUserActive, setIsUserActive] = useState(false);
   const [user, setUser] = useState(null);
-  const [isFetching, setIsFetching] = useState(true);
+  const [isFetchingUser, setIsFetchingUser] = useState(true);
 
   useEffect(() => {
     authenticateUser();
@@ -18,12 +18,12 @@ function AuthWrapper(props) {
       console.log("verifyService", response.data);
       setIsUserActive(true);
       setUser(response.data);
-      setIsFetching(false);
+      setIsFetchingUser(false);
     } catch (error) {
       console.log(error);
       setIsUserActive(false);
       setUser(null);
-      setIsFetching(false);
+      setIsFetchingUser(false);
     }
   };
 
@@ -31,9 +31,10 @@ function AuthWrapper(props) {
     isUserActive,
     user,
     authenticateUser,
+    isFetchingUser,
   };
 
-  if (isFetching === true) {
+  if (isFetchingUser === true) {
     return <h3>... Is validating User</h3>;
   }
 

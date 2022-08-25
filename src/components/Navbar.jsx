@@ -45,7 +45,9 @@ function NavBarFull() {
     return (
       <Navbar className="navBg" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="/">Musicalizate</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">
+            Musicalizate
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

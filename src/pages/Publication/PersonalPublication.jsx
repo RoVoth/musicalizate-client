@@ -21,7 +21,7 @@ function PersonalPublication() {
       setIsFetching(false);
     } catch (error) {
       console.log(error);
-      //     navigate("/error");
+      navigate("/error");
     }
   };
   if (isFetching === true) {

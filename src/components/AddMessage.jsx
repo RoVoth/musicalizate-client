@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { newMessageService } from "../services/message.services";
 
-function AddMessage({ publicationId }) {
+const AddMessage = ({ publicationId, callback }) => {
   const navigate = useNavigate();
 
   const [text, setText] = useState("");
@@ -16,6 +16,7 @@ function AddMessage({ publicationId }) {
 
     try {
       await newMessageService(newMessage, publicationId);
+
       setText("");
     } catch (error) {
       navigate(error);
@@ -36,8 +37,9 @@ function AddMessage({ publicationId }) {
         <br />
         <button
           type="button"
-          onClick={() => {
-            handleSubmit(publicationId);
+          onClick={async () => {
+            await handleSubmit(publicationId);
+            callback((oldCounter) => oldCounter + 1);
           }}
         >
           Comentar
@@ -45,6 +47,6 @@ function AddMessage({ publicationId }) {
       </form>
     </div>
   );
-}
+};
 
 export default AddMessage;

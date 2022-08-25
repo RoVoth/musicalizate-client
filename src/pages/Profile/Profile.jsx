@@ -3,15 +3,25 @@ import AddPublication from "../../components/AddPublication";
 import PersonalPublication from "../Publication/PersonalPublication";
 import { AuthContext } from "../../context/auth.context";
 import { useContext } from "react";
+import videoBg3 from "../../assets/profile.mp4";
 
 function Profile() {
   const { user } = useContext(AuthContext);
-  console.log("user", user.username);
+
   return (
-    <div>
-      <h2>Bienvenido {user.username}</h2>
-      <AddPublication />
-      <PersonalPublication />
+    <div className="main">
+      <div className="overlay"></div>
+      <video className="videoHome" src={videoBg3} autoPlay loop muted />
+      <div className="content">
+        <div>
+          <h2>Bienvenido {user?.username.toUpperCase()}</h2>
+          <br />
+          <AddPublication />
+          <br />
+          <br />
+          <PersonalPublication />
+        </div>
+      </div>
     </div>
   );
 }

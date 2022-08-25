@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import AddMessage from "../../components/AddMessage";
+import { AuthContext } from "../../context/auth.context";
 import ListMessage from "../../components/ListMessage";
 //Service
 import {
@@ -12,9 +13,15 @@ import {
 function PublicationDetails() {
   const navigate = useNavigate();
   const { id } = useParams();
-
+  const { user, isUserActive } = useContext(AuthContext);
   const [singlePublication, setSinglePublication] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
+  const [localMessageCounter, setLocalMessageCounter] = useState(0);
+  const isUserPublicationOwner = user?._id === singlePublication?.owner;
+
+  console.log("single", singlePublication);
+  console.log("user", user);
+  console.log("isUserPublicationOwner", isUserPublicationOwner);
 
   useEffect(() => {
     getSinglePublication();
@@ -54,15 +61,28 @@ function PublicationDetails() {
         <source src={singlePublication.file} />
       </video>
       <br />
-      <button onClick={handleDelete}>Borrar</button>
-      <Link to={`/publication/${singlePublication._id}/edit`}>
-        <button>Editar</button>
-      </Link>
+      {isUserPublicationOwner ? (
+        <div>
+          <button onClick={handleDelete}>Borrar</button>
+          <Link to={`/publication/${singlePublication._id}/edit`}>
+            <button>Editar</button>
+          </Link>
+        </div>
+      ) : undefined}
+
       <br />
-      <div>
-        <AddMessage publicationId={singlePublication._id} />
-        <ListMessage publicationId={singlePublication._id} />
-      </div>
+      {isUserActive ? (
+        <div>
+          <AddMessage
+            callback={setLocalMessageCounter}
+            publicationId={singlePublication._id}
+          />
+          <ListMessage
+            counter={localMessageCounter}
+            publicationId={singlePublication._id}
+          />
+        </div>
+      ) : undefined}
     </div>
   );
 }

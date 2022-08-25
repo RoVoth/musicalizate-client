@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginService } from "../../services/auth.services";
-
+import videoBg2 from "../../assets/acceder.mp4";
 import { AuthContext } from "../../context/auth.context";
 
 function Login() {
@@ -18,7 +18,6 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // ... login logic here
     const user = {
       email: email,
       password: password,
@@ -31,9 +30,7 @@ function Login() {
       const authToken = response.data.authToken;
 
       localStorage.setItem("authToken", authToken);
-
       authenticateUser();
-
       navigate("/profile");
     } catch (error) {
       if (error.response.status === 400) {
@@ -45,29 +42,51 @@ function Login() {
   };
 
   return (
-    <div>
-      <h3>Acceder</h3>
-      <form onSubmit={handleLogin}>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        <br />
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        <br />
-        {errorMessage ? <p>{errorMessage}</p> : null}
-        <br />
-        <button type="submit">Acceder</button>
-      </form>
+    <div className="main">
+      <div className="overlay"></div>
+      <video className="videoHome" src={videoBg2} autoPlay loop muted />
+      <div className="content">
+        <div>
+          <h1 className="text-center mt-4">Acceder</h1>
+
+          <div className="container">
+            <form onSubmit={handleLogin}>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email del Usuario</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Insertar Email"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                  placeholder="Insertar Password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                />
+                <br />
+                {errorMessage ? <p>{errorMessage}</p> : null}
+                <br />
+              </div>
+
+              <div className="text-center">
+                <button type="submit" class="btn btn-primary  m-4">
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
