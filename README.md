@@ -1,70 +1,209 @@
-# Getting Started with Create React App
+# Backlog Quest
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br>
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+This is an app for musicians to upload their videos and share opinions.
 
-### `npm start`
+## User Stories
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+-  **404:** As an anon/user I can see a 404 page if I try to reach a page that does not exist so that I know it's my fault
+-  **error:** As an anon/user I can see a error page if we have some problem with the conecction
+-  **Signup:** As an anon I can sign up in the platform so that I can start creating and managing my profile
+-  **Login:** As a user I can login to the platform so that I can start creating and managing my profile
+-  **Logout:** As a user I can logout from the platform so no one else can modify my information
+-  **upload video** As a user I can toogle between different types of media videos
+-  **Add elements** As a user I can add elements to my profile
+-  **Delete elements** As a user I can delete elements from my profile
+-  **Update elements** As a user I can update elements in my profile as done
+-  **Check profile** As a user I can check my profile and stats
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Backlog
 
-### `npm test`
+- New Publications
+- Make comments about this Publications
+- Video media
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Client / Frontend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## React Router Routes (React App)
+| Path                      | Component                      | Permissions | Behavior                                                     |
+| ------------------------- | --------------------           | ----------- | ------------------------------------------------------------ |
+| `/`                       | SplashPage                     | public `<Route>`            | Home page                                        |
+| `/signup`                 | SignupPage                     | anon only  `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup |
+| `/login`                  | LoginPage                      | anon only `<AnonRoute>`     | Login form, link to signup, navigate to homepage after login  |
+| `/publication`            | List of Publications            | anon only `<AnonRoute>`  | Navigate to homepage to the page and you can check the details|
+| `/publication/:id/details`| NavBar, Details, Video         | anon only `<AnonRoute>`  | Show the details and preview the video                               |
+| `/publication/:id/details`| NavBar, Details, Video         | anon only `<PrivateRoute>`  | Show the details and preview and add a comment                               |
+| `/publication/:id/edit`   | NavBar, ElementList video      | user only `<PrivateRoute>`  | Shows the button edit, and if you are the owner you can deleted too              |
+| `/profile`          | NavBar, create publication | user only `<PrivateRoute>`  | You can create a new publication and view your own publications                                    |
+                            |
+          
 
-### `npm run eject`
+## Components
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- AddMessage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- AddPublications
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- NavBar
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- ListMessage
 
-## Learn More
+- Search
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+ 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+ 
 
-### Code Splitting
+## Services
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Auth Service
+  - auth.login(newUser)
+  - auth.signup(user)
+  - auth.verify()
 
-### Analyzing the Bundle Size
+- Config Service
+  - service(axios)
+  - service.interceptors.request.use(config)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  
+- Message Service
+  - getMessageService(publicationId)
+  - newMessageService(newMessage, publicationId)
+  - deleteMessageService(messageId)
 
-### Making a Progressive Web App
+- Publication Service
+  - getPublicationService()
+  - getPersonalPublicationService()
+  - getPublicationDetailsService(id)
+  - addPublicationService(newPublication)
+  - deletePublicationService(id)
+  - updatePublicationService(id, updatePublication)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Upload Service
+  - uploadService(file)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+# Server / Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Models
+
+User model
+
+```javascript
+{
+username: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+}
+```
+
+
+
+Publication model
+
+```javascript
+ {
+title: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    enum: ["Pruebas", "Canción Propia", "Versión", "Otros"],
+    required: true,
+  },
+  description: String,
+  file: {
+    type: String,
+  },
+  owner: { type: Schema.Types.ObjectId, ref: "User" },
+ }
+```
+
+Message model
+
+```javascript
+ {
+  owner: { type: Schema.Types.ObjectId, ref: "User" },
+
+  publication: { type: Schema.Types.ObjectId, ref: "Publication" },
+
+  username: {
+    type: String,
+    required: true,
+  },
+  text: {
+    type: String,
+    required: true,
+  },
+ }
+```
+
+<br>
+
+
+## API Endpoints (backend routes)
+
+| HTTP Method | URL                         | Request Body                 | Success status | Error Status | Description                                                  |
+| ----------- | --------------------------- | ---------------------------- | -------------- | ------------ | ------------------------------------------------------------ |
+              |
+| POST        | `/auth/signup`                  | {name, email, password}      | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
+| POST        | `/auth/login`                   | {username, password}         | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session    |
+| GET        | `/auth/verify`                   | (req.payload)                      |               |         | Verify Token elements                                 
+| GET        | `/personalPublication`           | {req.payload._id}  |                | 400          | Show the profile elemnts                                         
+| POST       | `/publication`                   | { title, category, description, file } |       | 400          | Create elements                                      
+| GET         | `/publication/:id`              |                              |                |              | Show the publications elements                         
+| DELETE      | `/publication/:id`              |                              |                               | Delete   elements                                     
+| PATCH       | `/publication/:id`              |                              |                |              | Edit element
+| POST        | `/message/:publicationId`       |                              | 200            | 400          | Create MSG element                         
+| GET         | `/message/:messageId`           |                              | 201            | 400          | Show MSG element                                       
+| DELETE      | `/message/:messageId`           |                              |                | 400          | Delete MSG elements                                   
+| POST        | `/upload`                       |                              |                |              | Upload a video File                                   
+
+
+
+<br>
+
+
+## Links
+
+
+
+### Git
+
+The url to your repository and to your deployed project
+
+[Client repository Link](https://github.com/RoVoth/musicalizate-client.git)
+
+[Server repository Link](https://github.com/RoVoth/musicalizate-server.git)
+
+[Deployed App Link](https://musicalizate.netlify.app/)
+
+### Slides
+
+The url to your presentation slides
+
+[Slides Link](https://)
