@@ -5,9 +5,19 @@ import {
   updatePublicationService,
 } from "../../services/publication.services";
 import { uploadService } from "../../services/upload.services";
+import ClipLoader from "react-spinners/ClipLoader";
+
+const override: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "black",
+};
 
 function PublicationEdit() {
   const navigate = useNavigate();
+
+  let [loading, setLoading] = useState(false);
+  let [color, setColor] = useState("#000000");
 
   const { id } = useParams();
 
@@ -28,7 +38,6 @@ function PublicationEdit() {
   const getPublicationDetails = async (id) => {
     try {
       const response = await getPublicationDetailsService(id);
-      console.log(response.data);
       setTitle(response.data.title);
       setCategory(response.data.category);
       setDescription(response.data.description);
@@ -56,6 +65,8 @@ function PublicationEdit() {
     form.append("media", event.target.files[0]);
 
     try {
+      setLoading(true);
+      setColor();
       const response = await uploadService(form);
       setFileUrl(response.data.fileUrl);
     } catch (error) {
@@ -64,7 +75,7 @@ function PublicationEdit() {
   };
 
   return (
-    <div>
+    <div id="editar">
       <h3>Formulario de Edit</h3>
 
       <form>
@@ -93,9 +104,19 @@ function PublicationEdit() {
         />
         <br />
         <input type="file" onChange={handleFileUpload} />
-        <video autoPlay controls width={200}>
-          <source src={fileUrl} />
-        </video>
+        <br />
+        {fileUrl === null ? (
+          <video autoPlay controls width={200}>
+            <source src={fileUrl} />
+          </video>
+        ) : (
+          <ClipLoader
+            color={color}
+            loading={loading}
+            cssOverride={override}
+            size={50}
+          />
+        )}
         <br />
         <button type="button" onClick={handleEdit}>
           Editar

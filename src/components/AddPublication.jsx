@@ -59,60 +59,74 @@ function AddPublication() {
   return (
     <div>
       <h3>Agregar Publicación</h3>
-
-      <form>
-        <label htmlFor="title">Titulo </label>
-        <input
-          type="text"
-          name="title"
-          onChange={handleTitleChange}
-          value={title}
-        />
-        <br />
-        <label htmlFor="category">Categoria </label>
-        <select
-          name="category"
-          id="category"
-          onChange={handleCategoryChange}
-          value={category}
-        >
-          <option value=""></option>
-          <option value="Pruebas">Pruebas</option>
-          <option value="Canción Propia">Canción Propia</option>
-          <option value="Versión">Versión</option>
-          <option value="Otros">Otros</option>
-        </select>
-        <br />
-        <label htmlFor="description">Descripción </label>
-        <input
-          type="text"
-          name="description"
-          onChange={handleDescriptionChange}
-          value={description}
-        />
-        <br />
-        {fileUrl === null ? undefined : (
-          <button disabled={false} type="submit" onClick={handleSubmit}>
-            Agregar
-          </button>
-        )}
-      </form>
-      <div>
-        <h3>Añadir Video o Imagen</h3>
-        <input type="file" onChange={handleFileUpload} />
-        <br />
-
-        <div className="sweet-loading">
-          {fileUrl !== null ? (
-            <video src={fileUrl} autoPlay controls width={300}></video>
-          ) : (
-            <ClipLoader
-              color={color}
-              loading={loading}
-              cssOverride={override}
-              size={50}
+      <div className="container">
+        <form>
+          <div class="form-group">
+            <label htmlFor="title">Titulo </label>
+            <input
+              type="text"
+              name="title"
+              onChange={handleTitleChange}
+              value={title}
             />
-          )}
+          </div>
+          <div class="form-group">
+            <label htmlFor="category">Categoria </label>
+            <select
+              name="category"
+              id="category"
+              onChange={handleCategoryChange}
+              value={category}
+            >
+              <option value=""></option>
+              <option value="Pruebas">Pruebas</option>
+              <option value="Canción Propia">Canción Propia</option>
+              <option value="Versión">Versión</option>
+              <option value="Otros">Otros</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label htmlFor="description">Descripción </label>
+            <input
+              type="text"
+              name="description"
+              onChange={handleDescriptionChange}
+              value={description}
+            />
+          </div>
+
+          <div className="text-center">
+            {fileUrl === null ? undefined : (
+              <button
+                class="btn btn-primary  m-4"
+                disabled={false}
+                type="submit"
+                onClick={handleSubmit}
+              >
+                Agregar
+              </button>
+            )}
+          </div>
+        </form>
+        <div>
+          <h3 className="text-center mt-4">Añadir Video o Imagen</h3>
+          <input
+            class="btn btn-primary  m-4"
+            type="file"
+            onChange={handleFileUpload}
+          />
+          <div className="sweet-loading">
+            {fileUrl !== null ? (
+              <video src={fileUrl} autoPlay controls width={300}></video>
+            ) : (
+              <ClipLoader
+                color={color}
+                loading={loading}
+                cssOverride={override}
+                size={50}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

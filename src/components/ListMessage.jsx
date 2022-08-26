@@ -21,8 +21,7 @@ function MessageList({ publicationId, counter }) {
       setAllMessage(response.data);
       setIsFetching(false);
     } catch (error) {
-      console.log(error);
-      //navigate("/error");
+      navigate("/error");
     }
   };
 

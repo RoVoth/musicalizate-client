@@ -39,4 +39,22 @@
     height: 100%;
     background-color: rgba(0,0,0,.4);
   }
- 
+
+#detalles{
+  margin-top: 0px;
+  background-image: url("../assets/detalles.png");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+#editar{
+  margin-top: 0px;
+  background-image: url("../assets/editar.png");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}

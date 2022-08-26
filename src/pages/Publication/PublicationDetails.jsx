@@ -4,6 +4,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import AddMessage from "../../components/AddMessage";
 import { AuthContext } from "../../context/auth.context";
 import ListMessage from "../../components/ListMessage";
+import detailsIMG from "../../assets/detalles.png";
 //Service
 import {
   deletePublicationService,
@@ -18,10 +19,6 @@ function PublicationDetails() {
   const [isFetching, setIsFetching] = useState(true);
   const [localMessageCounter, setLocalMessageCounter] = useState(0);
   const isUserPublicationOwner = user?._id === singlePublication?.owner;
-
-  console.log("single", singlePublication);
-  console.log("user", user);
-  console.log("isUserPublicationOwner", isUserPublicationOwner);
 
   useEffect(() => {
     getSinglePublication();
@@ -51,7 +48,7 @@ function PublicationDetails() {
   }
 
   return (
-    <div>
+    <div id="detalles">
       <h3>Detalles de la Publicacion</h3>
 
       <p>Titulo: {singlePublication.title}</p>

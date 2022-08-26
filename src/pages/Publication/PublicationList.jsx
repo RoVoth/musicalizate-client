@@ -5,6 +5,8 @@ import Search from "../../components/Search";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 //Service
 import { getPublicationService } from "../../services/publication.services";
+import videoBg4 from "../../assets/publicaciones.mp4";
+import Card from "react-bootstrap/Card";
 
 function PublicationList() {
   const navigate = useNavigate();
@@ -25,7 +27,6 @@ function PublicationList() {
       setFilterPublication(response.data);
       setIsFetching(false);
     } catch (error) {
-      console.log(error);
       navigate("/error");
     }
   };
@@ -42,24 +43,38 @@ function PublicationList() {
   }
 
   return (
-    <div>
-      <h3>Lista de Publication</h3>
+    <div className="main">
+      <div className="overlay"></div>
+      <video className="videoHome" src={videoBg4} autoPlay loop muted />
+      <div className="content">
+        <br />
+        <h3>Lista de Publication</h3>
 
-      <Search filterByCategory={filterByCategory} />
+        <Search filterByCategory={filterByCategory} />
 
-      {filterPublication.map((eachPublication) => {
-        return (
-          <p key={eachPublication._id}>
-            <Link to={`/publication/${eachPublication._id}/details`}>
-              {eachPublication.title}
-              <br />
-              {eachPublication.category}
-              <br />
-              {eachPublication.description}
-            </Link>
-          </p>
-        );
-      })}
+        {filterPublication.map((eachPublication) => {
+          return (
+            <Card style={{ width: "30rem" }}>
+              <Card.Body>
+                <Card.Title style={{ color: "black" }}>
+                  <Link to={`/publication/${eachPublication._id}/details`}>
+                    <p>{eachPublication.title}</p>
+                  </Link>
+                </Card.Title>
+                <Card.Subtitle
+                  style={{ color: "black" }}
+                  className="mb-0 text-muted"
+                >
+                  {eachPublication.category}
+                </Card.Subtitle>
+                <Card.Text style={{ color: "black" }}>
+                  <p key={eachPublication._id}>{eachPublication.description}</p>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          );
+        })}
+      </div>
     </div>
   );
 }

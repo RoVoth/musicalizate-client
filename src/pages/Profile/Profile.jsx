@@ -14,11 +14,13 @@ function Profile() {
       <video className="videoHome" src={videoBg3} autoPlay loop muted />
       <div className="content">
         <div>
-          <h2>Bienvenido {user?.username.toUpperCase()}</h2>
-          <br />
-          <AddPublication />
-          <br />
-          <br />
+          <h2 className="text-center mt-4">
+            Bienvenido {user?.username.toUpperCase()}
+          </h2>
+          <div>
+            <AddPublication />
+          </div>
+
           <PersonalPublication />
         </div>
       </div>

@@ -107,33 +107,3 @@ function Signup() {
 }
 
 export default Signup;
-/*
-
-  return (
-    <Form onSubmit={handleSignup}>
-      <h3>Registro de Usuario</h3>
-      <Form.Group className="mb-3" controlId="formBasicUsername">
-        <Form.Label value={username} onChange={handleUsernameChange} >Nombre:</Form.Label>
-        <Form.Control type="text" placeholder="Nombre de usuario" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label value={email} onChange={handleEmailChange}>Email:</Form.Label>
-        <Form.Control type="email" placeholder="Email del Usuario" />
-        <Form.Text className="text-muted">
-          No compartiremos su email con nadie.
-        </Form.Text>
-      </Form.Group>      
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label value={password} onChange={handlePasswordChange}>Password:</Form.Label>
-        <Form.Control type="password" placeholder="Password del Usuario" />
-      </Form.Group>
-
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
-  );
-}
-
-
-*/

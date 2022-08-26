@@ -8,8 +8,6 @@ function Search(props) {
     console.log(event.target.value);
     setSearch(event.target.value);
     props.filterByCategory(event.target.value);
-
-    //  .filterPublication(event.target.value);
   };
 
   return (

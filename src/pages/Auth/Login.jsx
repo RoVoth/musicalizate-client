@@ -25,7 +25,6 @@ function Login() {
 
     try {
       const response = await loginService(user);
-      console.log(response.data);
 
       const authToken = response.data.authToken;
 

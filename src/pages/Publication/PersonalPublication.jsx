@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 //Service
 import { getPersonalPublicationService } from "../../services/publication.services";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
 
 function PersonalPublication() {
   const navigate = useNavigate();
@@ -20,7 +22,6 @@ function PersonalPublication() {
       setAllPublication(response.data);
       setIsFetching(false);
     } catch (error) {
-      console.log(error);
       navigate("/error");
     }
   };
@@ -33,16 +34,19 @@ function PersonalPublication() {
   return (
     <div>
       <h3>Lista de Profile</h3>
-
-      {allPublication.map((eachPublication) => {
-        return (
-          <p key={eachPublication._id}>
-            <Link to={`/publication/${eachPublication._id}/details`}>
-              {eachPublication.title}
-            </Link>
-          </p>
-        );
-      })}
+      <Card style={{ width: "13rem" }}>
+        {allPublication.map((eachPublication) => {
+          return (
+            <ListGroup variant="flush">
+              <p key={eachPublication._id}>
+                <Link to={`/publication/${eachPublication._id}/details`}>
+                  {eachPublication.title}
+                </Link>
+              </p>
+            </ListGroup>
+          );
+        })}
+      </Card>
     </div>
   );
 }
