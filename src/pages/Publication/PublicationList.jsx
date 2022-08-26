@@ -51,29 +51,38 @@ function PublicationList() {
         <h3>Lista de Publication</h3>
 
         <Search filterByCategory={filterByCategory} />
-
-        {filterPublication.map((eachPublication) => {
-          return (
-            <Card style={{ width: "30rem" }}>
-              <Card.Body>
-                <Card.Title style={{ color: "black" }}>
-                  <Link to={`/publication/${eachPublication._id}/details`}>
-                    <p>{eachPublication.title}</p>
-                  </Link>
-                </Card.Title>
-                <Card.Subtitle
-                  style={{ color: "black" }}
-                  className="mb-0 text-muted"
-                >
-                  {eachPublication.category}
-                </Card.Subtitle>
-                <Card.Text style={{ color: "black" }}>
-                  <p key={eachPublication._id}>{eachPublication.description}</p>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          );
-        })}
+        <div className="cardContainer">
+          {filterPublication.map((eachPublication) => {
+            return (
+              <div>
+                <div className="cardList">
+                  <Card style={{ width: "30rem" }}>
+                    <Card.Body>
+                      <Card.Title style={{ color: "black" }}>
+                        <Link
+                          to={`/publication/${eachPublication._id}/details`}
+                        >
+                          <p>{eachPublication.title}</p>
+                        </Link>
+                      </Card.Title>
+                      <Card.Subtitle
+                        style={{ color: "black" }}
+                        className="mb-0 text-muted"
+                      >
+                        {eachPublication.category}
+                      </Card.Subtitle>
+                      <Card.Text style={{ color: "black" }}>
+                        <p key={eachPublication._id}>
+                          {eachPublication.description}
+                        </p>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

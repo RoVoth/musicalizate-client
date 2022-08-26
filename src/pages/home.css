@@ -58,3 +58,17 @@
   background-size: cover;
 
 }
+.cardContainer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+}
+
+.cardList{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin: 20px;
+}

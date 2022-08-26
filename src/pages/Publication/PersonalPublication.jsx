@@ -34,19 +34,21 @@ function PersonalPublication() {
   return (
     <div>
       <h3>Lista de Profile</h3>
-      <Card style={{ width: "13rem" }}>
+      <div className="cardContainer">
         {allPublication.map((eachPublication) => {
           return (
-            <ListGroup variant="flush">
-              <p key={eachPublication._id}>
-                <Link to={`/publication/${eachPublication._id}/details`}>
-                  {eachPublication.title}
-                </Link>
-              </p>
-            </ListGroup>
+            <div className="cardList">
+              <Card style={{ width: "30rem" }}>
+                <p key={eachPublication._id}>
+                  <Link to={`/publication/${eachPublication._id}/details`}>
+                    {eachPublication.title}
+                  </Link>
+                </p>
+              </Card>
+            </div>
           );
         })}
-      </Card>
+      </div>
     </div>
   );
 }
